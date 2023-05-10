@@ -1,6 +1,33 @@
-import React from "react";
+"use client"
+import { useEffect, useState } from 'react';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
-const TopSongs = ( {songs}) => {
+
+
+
+
+const TopSongs = ({ songs }) => {
+  const [currentSong, setCurrentSong] = useState(null);
+
+
+  async function handleSongClick(key) {
+    const url = `https://shazam.p.rapidapi.com/songs/get-details?key=${key}&locale=en-US`;
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "a83b733ee3mshc48e67c9ca091eap16e4f1jsn47737f86ba07",
+        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+      },
+    };
+    const response = await fetch(url, options);
+    const result = await response.json();
+    const songAudio = result.hub?.actions[1]?.uri
+    
+    setCurrentSong(songAudio)
+  }
+
+
   return (
     <div>
       <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
@@ -13,7 +40,9 @@ const TopSongs = ( {songs}) => {
                 alt={song.title}
               />
               <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
-                <button class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                <button 
+                onClick={() => handleSongClick(song.key)}
+                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
@@ -34,6 +63,13 @@ const TopSongs = ( {songs}) => {
           </div>
         ))}
       </ul>
+
+      <div className='fixed bottom-0 left-0 right-0 '>
+        <AudioPlayer
+        src={currentSong}
+        onPlay={e => console.log("onPlay")}
+        ></AudioPlayer>
+      </div>
     </div>
   );
 };

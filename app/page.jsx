@@ -1,4 +1,4 @@
-import Aside from "@components/Aside";
+
 import TopSongs from "@components/TopSongs";
 
 const url =
@@ -17,13 +17,12 @@ async function getSongs() {
   return data;
 }
 
+
+
 async function Home() {
   const songs = await getSongs();
-  console.log(songs);
   return (
     <main className="flex flex-grow gradient bg-gradient-to-t from-blue-200 to-indigo-900 overflow-hidden">
-     
-      
       <div className="flex flex-col ">
         <div className=" m-12 font-bold text-lg">Browse</div>
         <TopSongs songs={songs}></TopSongs>
