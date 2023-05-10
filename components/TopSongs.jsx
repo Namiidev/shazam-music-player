@@ -7,6 +7,9 @@ const TopSongs = ({ songs }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSong, setCurrentSong] = useState(null);
 
+
+  // the encodeURIComponent javascript function help us to parse the text from the search input
+  // so it will be compatible for the url that we want to fetch even if it has spaces...
   const handleSearch = async () => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const url = `https://shazam.p.rapidapi.com/search?term=${encodedSearchTerm}&limit=1`;
