@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
@@ -52,17 +52,17 @@ const TopSongs = ({ songs }) => {
 
   return (
     <div>
-      <div className="flex gap-5 mb-4 ml-24">
+      <div className="flex gap-3 mb-4 ml-24">
         <input
           className="bg-black rounded-lg border-1 p-1"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyPress}
-          placeholder="Buscar canción..."
+          placeholder="Search song..."
         />
         <button className=" rounded-md bg-slate-600 p-1 hover:bg-slate-800" onClick={handleSearch}>
-          Buscar
+          Search
         </button>
       </div>
       <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
