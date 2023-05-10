@@ -1,38 +1,32 @@
-"use client"
-import { useEffect, useState } from 'react';
-import AudioPlayer from 'react-h5-audio-player';
-import 'react-h5-audio-player/lib/styles.css';
-
-
-
-
+"use client";
+import { useEffect, useState } from "react";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 const TopSongs = ({ songs }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentSong, setCurrentSong] = useState(null);
 
   const handleSearch = async () => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const url = `https://shazam.p.rapidapi.com/search?term=${encodedSearchTerm}&limit=1`;
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        'X-RapidAPI-Key': 'a83b733ee3mshc48e67c9ca091eap16e4f1jsn47737f86ba07',
-        'X-RapidAPI-Host': 'shazam.p.rapidapi.com',
+        "X-RapidAPI-Key": "a83b733ee3mshc48e67c9ca091eap16e4f1jsn47737f86ba07",
+        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
       },
     };
-    const res = await fetch(url,options);
+    const res = await fetch(url, options);
     const data = await res.json();
-      const songSearch = data.tracks.hits[0];
-      if (songSearch) {
-        const audioUrl = songSearch.track.hub.actions[1].uri;
-        setCurrentSong(audioUrl);
-      } else {
-        console.log('No se encontraron resultados para la canción buscada.');
-      }
-
-
-  }
+    const songSearch = data.tracks.hits[0];
+    if (songSearch) {
+      const audioUrl = songSearch.track.hub.actions[1].uri;
+      setCurrentSong(audioUrl);
+    } else {
+      console.log("No se encontraron resultados para la canción buscada.");
+    }
+  };
 
   async function handleSongClick(key) {
     const url = `https://shazam.p.rapidapi.com/songs/get-details?key=${key}&locale=en-US`;
@@ -45,25 +39,31 @@ const TopSongs = ({ songs }) => {
     };
     const response = await fetch(url, options);
     const result = await response.json();
-    const songAudio = result.hub?.actions[1]?.uri
-    
-    setCurrentSong(songAudio)
+    const songAudio = result.hub?.actions[1]?.uri;
+
+    setCurrentSong(songAudio);
   }
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
 
   return (
     <div>
-      <div className='flex gap-5 mb-4 ml-24'>
-      <input
-      className='bg-black'
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Buscar canción..."
-      />
-      <button 
-      className=' rounded-md bg-slate-600 p-1'
-      onClick={handleSearch}>Buscar</button>
+      <div className="flex gap-5 mb-4 ml-24">
+        <input
+          className="bg-black rounded-lg border-1 p-1"
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyPress}
+          placeholder="Buscar canción..."
+        />
+        <button className=" rounded-md bg-slate-600 p-1 hover:bg-slate-800" onClick={handleSearch}>
+          Buscar
+        </button>
       </div>
       <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
@@ -75,9 +75,10 @@ const TopSongs = ({ songs }) => {
                 alt={song.title}
               />
               <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
-                <button 
-                onClick={() => handleSongClick(song.key)}
-                class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition">
+                <button
+                  onClick={() => handleSongClick(song.key)}
+                  class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"
@@ -99,10 +100,10 @@ const TopSongs = ({ songs }) => {
         ))}
       </ul>
 
-      <div className='fixed bottom-0 left-0 right-0 '>
+      <div className="fixed bottom-0 left-0 right-0 ">
         <AudioPlayer
-        src={currentSong}
-        onPlay={e => console.log("onPlay")}
+          src={currentSong}
+          onPlay={(e) => console.log("onPlay")}
         ></AudioPlayer>
       </div>
     </div>
