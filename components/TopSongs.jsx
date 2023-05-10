@@ -8,8 +8,31 @@ import 'react-h5-audio-player/lib/styles.css';
 
 
 const TopSongs = ({ songs }) => {
+  const [searchTerm, setSearchTerm] = useState('');
   const [currentSong, setCurrentSong] = useState(null);
 
+  const handleSearch = async () => {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const url = `https://shazam.p.rapidapi.com/search?term=${encodedSearchTerm}&limit=1`;
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': 'a83b733ee3mshc48e67c9ca091eap16e4f1jsn47737f86ba07',
+        'X-RapidAPI-Host': 'shazam.p.rapidapi.com',
+      },
+    };
+    const res = await fetch(url,options);
+    const data = await res.json();
+      const songSearch = data.tracks.hits[0];
+      if (songSearch) {
+        const audioUrl = songSearch.track.hub.actions[1].uri;
+        setCurrentSong(audioUrl);
+      } else {
+        console.log('No se encontraron resultados para la canción buscada.');
+      }
+
+
+  }
 
   async function handleSongClick(key) {
     const url = `https://shazam.p.rapidapi.com/songs/get-details?key=${key}&locale=en-US`;
@@ -30,6 +53,18 @@ const TopSongs = ({ songs }) => {
 
   return (
     <div>
+      <div className='flex gap-5 mb-4 ml-24'>
+      <input
+      className='bg-black'
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Buscar canción..."
+      />
+      <button 
+      className=' rounded-md bg-slate-600 p-1'
+      onClick={handleSearch}>Buscar</button>
+      </div>
       <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
           <div className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  ">
@@ -48,7 +83,7 @@ const TopSongs = ({ songs }) => {
                     width="40"
                     height="40"
                     fill="currentColor"
-                    class="bi bi-play-circle-fill"
+                    className="bi bi-play-circle-fill"
                     viewBox="0 0 16 16"
                   >
                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
