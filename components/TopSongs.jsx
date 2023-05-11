@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import ReactAudioPlayer from "react-audio-player";
+import ReactAudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 
 const TopSongs = ({ songs }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSong, setCurrentSong] = useState(null);
+  const [songTitle, setSongTitle] = useState("")
 
   // the encodeURIComponent javascript function help us to parse the text from the search input
   // so it will be compatible for the url that we want to fetch even if it has spaces...
@@ -21,11 +23,18 @@ const TopSongs = ({ songs }) => {
     const res = await fetch(url, options);
     const data = await res.json();
     const songSearch = data.tracks.hits[0];
+    const title = songSearch.track.title
     if (songSearch) {
       const audioUrl = songSearch.track.hub.actions[1].uri;
       setCurrentSong(audioUrl);
     } else {
       console.log("No se encontraron resultados para la canción buscada.");
+    }
+
+    if (title) {
+      setSongTitle(title)
+    } else {
+      console.log("no title")
     }
   };
 
@@ -53,9 +62,10 @@ const TopSongs = ({ songs }) => {
 
   return (
     <div>
-      <div className="flex gap-3 mb-4 ml-24">
+      
+      <div className="flex gap-3 mb-4 items-center justify-center">
         <input
-          className="bg-black rounded-lg border-1 p-1"
+          className="bg-black rounded-2xl border-1 p-4 w-96 h-12"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -63,18 +73,21 @@ const TopSongs = ({ songs }) => {
           placeholder="Search song..."
         />
         <button
-          className=" rounded-md bg-slate-600 p-1 hover:bg-slate-800"
+          className=" rounded-xl h-12 bg-slate-500 p-2 hover:bg-slate-800"
           onClick={handleSearch}
         >
           Search
         </button>
+      </div>
+      <div>
+        <h1 className="mb-8 ml-32 text-5xl">Browse</h1>
       </div>
       <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
           <div className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  ">
             <div className="group relative ">
               <img
-                className="h-40 w-full md:w-72 block rounded "
+                className="h-48 w-full md:w-72 block rounded "
                 src={song.images?.coverart}
                 alt={song.title}
               />
@@ -105,7 +118,10 @@ const TopSongs = ({ songs }) => {
       </ul>
 
       <div className="fixed bottom-0 left-0 right-0 rounded-none ">
-        <ReactAudioPlayer className="min-w-full rounded-none" src={currentSong} autoPlay controls />
+        <ReactAudioPlayer className="min-w-full rounded-none" src={currentSong} autoPlay controls 
+        title={songTitle} // Agrega el título de la canción
+        style={{ backgroundColor: '#000000', color: '#333333' }} // Agrega estilos personalizados
+        > <h3 className="z-10 text-white">{songTitle}</h3> </ReactAudioPlayer>
       </div>
     </div>
   );

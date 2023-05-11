@@ -79,6 +79,7 @@ audio::-webkit-media-controls-panel {
     rgb(0, 0, 0),
     rgba(53, 51, 132)
   );
+  -webkit-border-radius: 0;
 }
 
 audio::-webkit-media-controls-play-button {
@@ -116,4 +117,9 @@ audio {
   border-radius: 0px;
   border: 10px;
   border-color: black;
+}
+
+audio {
+  -webkit-border-radius: 0; /* Elimina el border-radius */
+  border-radius: 0; /* Elimina el border-radius para navegadores compatibles */
 }
