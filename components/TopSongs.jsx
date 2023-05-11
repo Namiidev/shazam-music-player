@@ -1,12 +1,10 @@
 "use client";
 import { useState } from "react";
-import AudioPlayer from "react-h5-audio-player";
-import "react-h5-audio-player/lib/styles.css";
+import ReactAudioPlayer from "react-audio-player";
 
 const TopSongs = ({ songs }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSong, setCurrentSong] = useState(null);
-
 
   // the encodeURIComponent javascript function help us to parse the text from the search input
   // so it will be compatible for the url that we want to fetch even if it has spaces...
@@ -64,7 +62,10 @@ const TopSongs = ({ songs }) => {
           onKeyDown={handleKeyPress}
           placeholder="Search song..."
         />
-        <button className=" rounded-md bg-slate-600 p-1 hover:bg-slate-800" onClick={handleSearch}>
+        <button
+          className=" rounded-md bg-slate-600 p-1 hover:bg-slate-800"
+          onClick={handleSearch}
+        >
           Search
         </button>
       </div>
@@ -103,11 +104,8 @@ const TopSongs = ({ songs }) => {
         ))}
       </ul>
 
-      <div className="fixed bottom-0 left-0 right-0 ">
-        <AudioPlayer
-          src={currentSong}
-          onPlay={(e) => console.log("onPlay")}
-        ></AudioPlayer>
+      <div className="fixed bottom-0 left-0 right-0 rounded-none ">
+        <ReactAudioPlayer className="min-w-full rounded-none" src={currentSong} autoPlay controls />
       </div>
     </div>
   );
