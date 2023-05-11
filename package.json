@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "autoprefixer": "10.4.14",
+    "dotenv": "^16.0.3",
     "next": "13.4.1",
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "18.2.0",
     "react-h5-audio-player": "^3.8.6",
-    "tailwindcss": "3.3.2"
+    "tailwindcss": "3.3.2",
+    "dotenv-webpack": "^1.7.0"
   }
 }
