@@ -22,10 +22,10 @@ const TopSongs = ({ songs }) => {
     };
     const res = await fetch(url, options);
     const data = await res.json();
-    console.log(data);
 
     const songSearch = await data.tracks.hits;
-    const songSearchTitle = songSearch.map((hit) => { hit.track.title });
+    const songSearchTitle = songSearch.map((hit) =>  hit.track.title );
+    console.log(songSearch)
     console.log(songSearchTitle);
 
   };
