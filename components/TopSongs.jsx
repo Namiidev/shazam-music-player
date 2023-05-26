@@ -6,13 +6,13 @@ import 'react-h5-audio-player/lib/styles.css';
 const TopSongs = ({ songs }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentSong, setCurrentSong] = useState(null);
-  const [songTitle, setSongTitle] = useState("")
+  const [songTitle, setSongTitle] = useState("no title")
 
   // the encodeURIComponent javascript function help us to parse the text from the search input
   // so it will be compatible for the url that we want to fetch even if it has spaces...
   const handleSearch = async () => {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
-    const url = `https://shazam.p.rapidapi.com/search?term=${encodedSearchTerm}&limit=1`;
+    const url = `https://shazam.p.rapidapi.com/search?term=${encodedSearchTerm}&limit=10`;
     const options = {
       method: "GET",
       headers: {
@@ -22,20 +22,12 @@ const TopSongs = ({ songs }) => {
     };
     const res = await fetch(url, options);
     const data = await res.json();
-    const songSearch = data.tracks.hits[0];
-    const title = songSearch.track.title
-    if (songSearch) {
-      const audioUrl = songSearch.track.hub.actions[1].uri;
-      setCurrentSong(audioUrl);
-    } else {
-      console.log("No se encontraron resultados para la canción buscada.");
-    }
+    console.log(data);
 
-    if (title) {
-      setSongTitle(title)
-    } else {
-      console.log("no title")
-    }
+    const songSearch = await data.tracks.hits;
+    const songSearchTitle = songSearch.map((hit) => { hit.track.title });
+    console.log(songSearchTitle);
+
   };
 
   async function handleSongClick(key) {
@@ -82,7 +74,7 @@ const TopSongs = ({ songs }) => {
       <div>
         <h1 className="mb-8 ml-32 text-5xl">Browse</h1>
       </div>
-      <ul className="flex gap-6 mb-8 flex-wrap justify-center  ">
+      <ul className="flex gap-6 mb-24 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
           <div className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  ">
             <div className="group relative ">
@@ -94,7 +86,7 @@ const TopSongs = ({ songs }) => {
               <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
                 <button
                   onClick={() => handleSongClick(song.key)}
-                  class="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
+                  className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +107,7 @@ const TopSongs = ({ songs }) => {
             </div>
           </div>
         ))}
-      </ul>
+      </ul >
 
       <div className="fixed bottom-0 left-0 right-0 rounded-none ">
         <ReactAudioPlayer className="min-w-full rounded-none" src={currentSong} autoPlay controls 

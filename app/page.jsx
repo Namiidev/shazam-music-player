@@ -12,7 +12,7 @@ const options = {
 };
 
 async function getSongs() {
-  const response = await fetch(url, options);
+  const response = await fetch(url, options, { next: { revalidate: 172800 } });
   const data = await response.json();
   return data;
 }

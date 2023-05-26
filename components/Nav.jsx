@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Nav = () => {
   return (
-    <div className='nav fixed top-0 left-0 right-0 flex justify-between z-10 '>
+    <div className='nav flex justify-between z-10'>
       <h1>
         <Link href="./">Explicit</Link>
       </h1>
