@@ -74,49 +74,41 @@ const TopSongs = ({ songs }) => {
       </div>
       <ul className="flex gap-6 mt-24 mb-24 flex-wrap justify-center">
         {
-         if (searchResults.length === 0) {
-          return (<p>No results</p>)
-         } else {
-          return (
-            searchResults.map((searchResult) => (
-              <div
-              className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  "
-              key={searchResult.track.key}
-            >
-              <div className="group relative ">
-                <img
-                  className="h-48 w-full md:w-72 block rounded "
-                  src={searchResult.track.images?.coverart}
-                  alt={searchResult.track.title}
-                />
-                <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
-                  <button
-                    onClick={() => handleSongClick(searchResult.track.key)}
-                    className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="40"
-                      height="40"
-                      fill="currentColor"
-                      className="bi bi-play-circle-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div className="p-5">
-                <h3 className="text-white text-lg truncate">{searchResult.track.title}</h3>
-                <p className="text-gray-400 truncate">{searchResult.track.subtitle}</p>
-              </div>
+        searchResults.map((searchResult) => (
+          <div
+          className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  "
+          key={searchResult.track.key}
+        >
+          <div className="group relative ">
+            <img
+              className="h-48 w-full md:w-72 block rounded "
+              src={searchResult.track.images?.coverart}
+              alt={searchResult.track.title}
+            />
+            <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-60 w-full h-full top-0 flex items-center group-hover:opacity-100 transition justify-evenly">
+              <button
+                onClick={() => handleSongClick(searchResult.track.key)}
+                className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="40"
+                  height="40"
+                  fill="currentColor"
+                  className="bi bi-play-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                </svg>
+              </button>
             </div>
-            ))
-          )
-            
-         }
-       }
+          </div>
+          <div className="p-5">
+            <h3 className="text-white text-lg truncate">{searchResult.track.title}</h3>
+            <p className="text-gray-400 truncate">{searchResult.track.subtitle}</p>
+          </div>
+        </div>
+        ))}
       </ul>
       <div>
         <h1 className="mb-8 ml-32 text-5xl">Browse</h1>
