@@ -72,11 +72,11 @@ const TopSongs = ({ songs }) => {
           Search
         </button>
       </div>
-      <ul className="flex gap-6 mt-24 mb-24 flex-wrap justify-center">
+      <ul className="flex gap-6 mt-12 mb-12 flex-wrap justify-center">
         {
         searchResults.map((searchResult) => (
           <div
-          className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  "
+          className="bg-gray-900 shadow-lg rounded-lg w-60 p-3 mb-8  "
           key={searchResult.track.key}
         >
           <div className="group relative ">
@@ -116,7 +116,7 @@ const TopSongs = ({ songs }) => {
       <ul className="flex gap-6 mb-24 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
           <div
-            className="bg-gray-900 shadow-lg rounded w-60 p-3 mb-8  "
+            className="bg-gray-900 shadow-lg rounded-lg w-60 p-3 mb-8  "
             key={song.key}
           >
             <div className="group relative ">

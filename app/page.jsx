@@ -24,7 +24,7 @@ async function Home() {
   return (
     <main className="flex flex-grow gradient bg-gradient-to-t from-blue-200 to-indigo-900 overflow-hidden">
       <div className="flex flex-col ">
-        <div className=" m-12 font-bold text-lg">Browse</div>
+        <div className="m-8 font-bold text-lg"></div>
         <TopSongs songs={songs}></TopSongs>
       </div>
     </main>
