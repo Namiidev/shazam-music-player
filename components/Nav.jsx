@@ -8,7 +8,7 @@ import logo from '@components/explicitlogo.png'
 
 const Nav = () => {
   return (
-    <div className='nav flex justify-between z-10'>
+    <div className='nav flex justify-between gap-8 z-10'>
         <Link href="./" className='ml-4'>
         <Image className='w-full h-12'
       src={logo}
@@ -17,7 +17,7 @@ const Nav = () => {
       alt="logo"
     />
         </Link>
-      <ul className=' mr-28'>
+      <ul className=' lg:mr-24 mr-8'>
         <li className='list'>
           <Link href="./about">About</Link>
         </li>

@@ -56,9 +56,9 @@ const TopSongs = ({ songs }) => {
 
   return (
     <div>
-      <div className="flex gap-3 mb-4 items-center justify-center">
+      <div className="flex gap-3 mb-4 mt-4 flex-wrap items-center justify-center">
         <input
-          className="bg-black rounded-2xl border-1 p-4 w-96 h-12"
+          className="bg-black rounded-2xl border-1 p-4 lg:w-96 h-12"
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -72,7 +72,7 @@ const TopSongs = ({ songs }) => {
           Search
         </button>
       </div>
-      <ul className="flex gap-6 mt-12 mb-12 flex-wrap justify-center">
+      <ul className="flex gap-6 mt-12 lg:mb-12 mb-4 flex-wrap justify-center">
         {
         searchResults.map((searchResult) => (
           <div
@@ -111,7 +111,7 @@ const TopSongs = ({ songs }) => {
         ))}
       </ul>
       <div>
-        <h1 className="mb-8 ml-32 text-5xl">Browse</h1>
+        <h1 className="mb-8 lg:ml-32 ml-4 lg:text-5xl text-2xl">Browse</h1>
       </div>
       <ul className="flex gap-6 mb-24 flex-wrap justify-center  ">
         {songs.tracks.map((song) => (
@@ -155,7 +155,7 @@ const TopSongs = ({ songs }) => {
         <ReactAudioPlayer
           className="min-w-full rounded-none"
           src={currentSong}
-          autoPlay
+          autoPlay={true}
           controls
           title={songTitle} // Agrega el título de la canción
           style={{ backgroundColor: "#000000", color: "#333333" }} // Agrega estilos personalizados
