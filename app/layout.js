@@ -5,7 +5,8 @@ export const metadata = {
   title: "Explicit",
   description: "top music charts everywhere for free",
   icons: {
-    icon: { url: '/favicon.ico', type: 'image/ico' },
+    icon: { url: '/favicon.svg', type: 'image/svg' },
+    shortcut: { url: '/favicon.svg', type: 'image/svg' },
   },
 };
 
