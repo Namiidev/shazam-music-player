@@ -9,12 +9,12 @@ import logo from '@components/explicitlogo.png'
 const Nav = () => {
   return (
     <div className='nav flex justify-between z-10'>
-        <Link href="./">
+        <Link href="./" className='ml-4'>
         <Image className='w-full h-12'
       src={logo}
       width={500}
       height={500}
-      alt="Picture of the author"
+      alt="logo"
     />
         </Link>
       <ul className=' mr-28'>
