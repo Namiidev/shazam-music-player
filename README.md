@@ -1,7 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 # Music Player made with Shazam API (RapidAPI)
-
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 If you don't want to test it locally you can enter to a live demo [HERE](https://shazam-music-player.vercel.app/) or https://shazam-music-player.vercel.app/
 
 ## For testing locally.
@@ -31,3 +29,6 @@ simply use the searchbar to find you favourite song, any song uploaded to Shazam
 - dotenv (for hidden variables and keys)
 - Vercel for deployment
 
+# LICENSE
+
+this project use the MIT LICENSE
