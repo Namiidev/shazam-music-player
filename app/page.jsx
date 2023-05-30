@@ -1,6 +1,5 @@
 
 import TopSongs from "@components/TopSongs";
-import { Analytics } from '@vercel/analytics/react';
 
 const url =
   "https://shazam.p.rapidapi.com/charts/track?locale=en-US&pageSize=20&startFrom=0";
@@ -28,7 +27,6 @@ async function Home() {
         <div className="mt-8 font-bold text-lg"></div>
         <TopSongs songs={songs}></TopSongs>
       </div>
-      <Analytics></Analytics>
     </main>
   );
 }
