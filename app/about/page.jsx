@@ -7,6 +7,7 @@ const AboutPage = () => {
         <h3 className="text-lg text-white font-bold">
           Project made for education purposes, I don't own any of the songs or
           images displayed on this App.
+          update.
         </h3>
       </div>
     </div>
