@@ -1,5 +1,9 @@
 # Music Player made with Shazam API (RapidAPI)
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) that allows the possibility to search for any song available in Shazam database, just for testing purposes.
+
+## Live Demo
+
 If you don't want to test it locally you can enter to a live demo [HERE](https://shazam-music-player.vercel.app/) or https://shazam-music-player.vercel.app/
 
 ## For testing locally.
