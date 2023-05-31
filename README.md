@@ -1,6 +1,8 @@
 # Music Player made with Shazam API (RapidAPI)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) that allows the possibility to search for any song available in Shazam database, just for testing purposes.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) that allows the possibility to search for any song available in Shazam database just for testing purposes, I'm using a custom media player made by a third party (check Stack section) temporally.
+
+The App is Fetching the Top Songs chart (the one below Browse) with the revalidate cached data feature that offers NextJS 13 , every 48 Hours so we can keep sure that is going to be up to date with new songs.
 
 ## Live Demo
 
